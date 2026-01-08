@@ -1,0 +1,34 @@
+
+version: '3.8'
+
+services:
+
+  ecommerce-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/managementsystemaftersales
+      - SPRING_DATASOURCE_USERNAME=managementsystemaftersales_user
+      - SPRING_DATASOURCE_PASSWORD=passworduntukaftersales1234)(*
+    depends_on:
+      - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=managementsystemaftersales
+      - POSTGRES_USER=managementsystemaftersales_user
+      - POSTGRES_PASSWORD=passworduntukaftersales1234)(*
+    volumes:
+      - ecommerce_data:/var/lib/postgresql/data
+
+volumes:
+  ecommerce_data:
